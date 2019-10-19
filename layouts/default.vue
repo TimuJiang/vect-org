@@ -1,5 +1,5 @@
 <template lang="pug">
-	.default-layout
+	v-app.default-layout
 		m-header
 		nuxt
 		m-footer

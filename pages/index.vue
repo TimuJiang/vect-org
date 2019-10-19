@@ -1,5 +1,5 @@
 <template lang="pug">
-	v-layout( column justify-center align-center)
+	v-layout(column align-center)
 		m-banner
 		v-flex(xs12 sm8 md6)
 			v-card
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-    import MBanner from '~/components/m-banner'
+    import MBanner from '~/components/index/m-banner'
 	export default {
 		components: {
             MBanner
