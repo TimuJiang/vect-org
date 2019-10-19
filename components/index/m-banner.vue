@@ -52,6 +52,8 @@
 			width: 1280px;
 			margin: 0 auto;
 			z-index: 3;
+			&__left {
+			}
 			&__right {
 				padding: 50px 100px;
 			}

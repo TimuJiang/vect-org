@@ -49,6 +49,7 @@ html {
 	font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
 }
 a {
+	color: #F5F5F5;
 	text-decoration: none;
 }
 
@@ -60,7 +61,6 @@ a:visited {
 ::-webkit-scrollbar{
 	width:6px;
 	height:6px;
-	/**/
 }
 ::-webkit-scrollbar-track{
 	opacity: 0;
