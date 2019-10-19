@@ -19,23 +19,21 @@
 					img(src="~assets/images/ability-4.png")
 					p.ability-row__title 市场数据分析
 					p.ability-row__sub-title 全国市场的一些分析什么的
-		.intro-row
-			.intro-row__content
-				h3.intro-title
-					span 软件平台
-					span 核心优势
-				p.intro-content 您可以双击这里或者点击编辑按钮来修改内容，您还可以添加图标按钮图片等常用元素
-		.try-row
-			.try-row__content.row
-				p VECTMAP 向量城市共享地图更加简单、更高效、更可靠。
-				v-btn.go-use(rounded color="orange darken-3" drak) 免费试用
+		m-intro
+		m-price
+		m-try
 </template>
 
 <script>
     import MBanner from '~/components/index/m-banner'
+    import MIntro from '~/components/index/m-intro'
+    import MPrice from '~/components/index/m-price'
 	export default {
 		components: {
-            MBanner
+            MBanner,
+            MIntro,
+            MPrice,
+            MTry: ()=>import('~/components/index/m-try')
 		}
 	}
 </script>
@@ -76,45 +74,6 @@
 				}
 			}
 
-		}
-		.intro-row {
-			width: 100%;
-			height: 700px;
-			background: #f2f2f2;
-			&__content {
-				width: 1280px;
-				margin: auto;
-				padding: 24px;
-				text-align: center;
-				.intro-title {
-					font-size: 32px;
-					span:last-child {
-						color: #ef4f19;
-					}
-				}
-				.intro-content {
-					padding: 24px;
-				}
-			}
-		}
-		.try-row {
-			background-color: #22282d;
-			width: 100%;
-			height: 160px;
-			.try-row__content {
-				display: flex;
-				align-items: center;
-				height: 100%;
-				justify-content: space-between;
-				p {
-					color: #808080;
-					margin: 0;
-				}
-				.go-use {
-					width: 140px;
-					color: #F5F5F5;
-				}
-			}
 		}
 	}
 </style>

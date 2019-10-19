@@ -3,7 +3,7 @@ export const Menus = [
 		name: '首页',
 		path: '/'
 	},{
-		name: '服务',
+		name: '共享地图',
 		path: '/about'
 	},{
 		name: '定价',

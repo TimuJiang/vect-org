@@ -6,7 +6,8 @@
 			ul.m-menu
 				li.m-menu-item(v-for="item in _menus" :key="item.path" :class="{current: $nuxt.$route.path == item.path}")
 					nuxt-link.link(:to="item.path" ) {{item.name}}
-
+			ul.m-sub-menu
+				v-btn(rounded color="orange darken-3" dark small @click="goRegiter") 注册
 </template>
 
 <script>
@@ -39,6 +40,7 @@
 				}
 			}
 			.m-menu {
+				flex: 1;
 				display: flex;
 				margin-left: 100px;
 				.m-menu-item {
@@ -60,6 +62,11 @@
 						height: 100%;
 					}
 				}
+			}
+
+			.m-sub-menu {
+				display: flex;
+				align-items: center;
 			}
 		}
 
