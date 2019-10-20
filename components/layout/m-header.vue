@@ -7,7 +7,7 @@
 				li.m-menu-item(v-for="item in _menus" :key="item.path" :class="{current: $nuxt.$route.path == item.path}")
 					nuxt-link.link(:to="item.path" ) {{item.name}}
 			ul.m-sub-menu
-				v-btn(rounded color="orange darken-3" dark small @click="goRegiter") 注册
+				v-btn(rounded color="orange darken-3" dark small @click="goRegister") 注册
 </template>
 
 <script>
@@ -23,7 +23,12 @@
 		    this._menus = Menus
 		},
 		mounted() {
-        }
+        },
+		methods: {
+		    goRegister() {
+                this.$router.push('/register')
+			}
+		}
     }
 </script>
 <style lang="scss" scoped>
