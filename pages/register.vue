@@ -27,101 +27,100 @@
 </template>
 
 <script>
-	export default {
-	    layout: 'simple',
-        head () {
-	        let TencentCaptcha = window.TencentCaptcha
+
+    export default {
+        layout: 'simple',
+        head() {
             return {
                 title: '注册',
                 script: [
                     {
-                        skip: TencentCaptcha,
-                        hid: 'TCaptcha',
+                        once: true,
+						skip: this.externalLoaded,
                         src: 'https://ssl.captcha.qq.com/TCaptcha.js',
-                        defer: true,
-                        async: true,
-                        callback: this.initTC
+                        callback: () => (this.externalLoaded = true)
                     }
-				]
+                ]
             }
         },
-		data() {
-			return {
-				valid: false,
-				project: 'default',
-				firstName: '',
-				smsCode: '',
-				password: '',
-				password2: '',
-				agree: false,
-				email: '',
+        transition: {
+            name: 'page',
+            mode: 'out-in'
+        },
+        data() {
+            return {
+                externalLoaded: false,
+                valid: false,
+                project: 'default',
+                firstName: '',
+                smsCode: '',
+                password: '',
+                password2: '',
+                agree: false,
+                email: '',
                 tencentCaptcha: null,
-				time: 60,
+                time: 60,
                 timer: null,
-				showTime: false,
-				getting: false
-			}
-		},
-		beforeCreate() {
-			this._emailRules = [
-				v => !!v || 'E-mail is required',
-				v => /.+@.+/.test(v) || 'E-mail must be valid',
-			]
-			this._nameRules =  [
-				v => !!v || 'Name is required',
-				v => v.length <= 10 || 'Name must be less than 10 characters',
-			]
-		},
-		asyncData(context) {
-			return {project: 'nuxt'}
-		},
-		mounted() {
-           if(TencentCaptcha) {
-               this.initTC()
-		   }
-		},
-		methods: {
+                showTime: false,
+                getting: false
+            }
+        },
+        beforeCreate() {
+            this._nameRules = [
+                v => !!v || 'Name is required',
+                v => v.length <= 10 || 'Name must be less than 10 characters',
+            ]
+        },
+        beforeDestroy() {
+        },
+        asyncData(context) {
+            return {project: 'nuxt'}
+        },
+        mounted() {
+        },
+        methods: {
             initTC() {
-                console.log('initTC')
-                if(!this.tencentCaptcha) {
+                if (!this.tencentCaptcha) {
+                    const {TencentCaptcha} = this.$window
                     this.tencentCaptcha = new TencentCaptcha('2038819750', this.callback);
                 }
-			},
+            },
             callback(res) {
-                if(res.ret === 0){
+                if (res.ret === 0) {
                     this.send(res.ticket)
                 }
-			},
+            },
             getCode() {
-                if(this.showTime) return
-				console.log(/TencentCaptcha/, TencentCaptcha)
+                if (this.showTime) return
+				this.initTC()
                 this.tencentCaptcha.show()
-			},
-			send() {
-				this.getting = true
-				setTimeout(() => {
+            },
+            send() {
+                this.getting = true
+                setTimeout(() => {
                     this.getting = false
-					this.startTime()
-				}, 5000)
-			},
-			startTime() {
+                    this.startTime()
+                }, 5000)
+            },
+            startTime() {
                 this.time = 60
-				this.showTime = true
+                this.showTime = true
                 this.timer = setInterval(() => {
-                    if(this.time <= 0){
+                    if (this.time <= 0) {
                         clearInterval(this.timer)
                         this.showTime = false
-						return
+                        return
                     }
                     this.time--
                 }, 1000)
-			},
-            doRegister() {}
-		}
-	}
+            },
+            doRegister() {
+            }
+        }
+    }
 </script>
 <style lang="scss" scoped>
-	.register{
+	.register {
 		&-content {
 			padding: 50px 0;
 			width: 400px;
@@ -132,10 +131,12 @@
 				font-size: 20px;
 				padding: 10px 0;
 			}
+
 			.btn-row {
 				margin: 30px 0;
 			}
-			.policy{
+
+			.policy {
 				width: 100%;
 				font-size: 14px;
 				text-align: center;
@@ -143,6 +144,7 @@
 				padding: 10px 0;
 				color: #7f828b;
 			}
+
 			.to-login {
 				width: 100%;
 				font-size: 14px;
@@ -151,10 +153,12 @@
 				color: #7f828b;
 			}
 		}
+
 		&-header {
 			height: 60px;
 			border-bottom: 1px solid #dddddd;
 			text-align: center;
+
 			a.logo {
 				display: block;
 				height: 40px;
