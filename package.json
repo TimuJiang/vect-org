@@ -1,7 +1,7 @@
 {
-  "name": "vue-ssr-demo",
+  "name": "vect-org",
   "version": "1.0.0",
-  "description": "My excellent Nuxt.js project",
+  "description": "vectdata",
   "author": "xiaosong.jiang",
   "private": true,
   "scripts": {

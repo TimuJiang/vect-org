@@ -30,13 +30,18 @@
 	export default {
 	    layout: 'simple',
         head () {
+	        let TencentCaptcha = window.TencentCaptcha
             return {
                 title: '注册',
-                meta: [
-                    { hid: 'description', name: 'description', content: 'My custom description' }
-                ],
                 script: [
-                    { hid: 'captcha', src: 'https://ssl.captcha.qq.com/TCaptcha.js'}
+                    {
+                        skip: TencentCaptcha,
+                        hid: 'TCaptcha',
+                        src: 'https://ssl.captcha.qq.com/TCaptcha.js',
+                        defer: true,
+                        async: true,
+                        callback: this.initTC
+                    }
 				]
             }
         },
@@ -66,15 +71,22 @@
 				v => !!v || 'Name is required',
 				v => v.length <= 10 || 'Name must be less than 10 characters',
 			]
-            if(this.tencentCaptcha)  this.tencentCaptcha.destroy()
 		},
 		asyncData(context) {
 			return {project: 'nuxt'}
 		},
 		mounted() {
-            this.tencentCaptcha = new TencentCaptcha('2038819750', this.callback);
+           if(TencentCaptcha) {
+               this.initTC()
+		   }
 		},
 		methods: {
+            initTC() {
+                console.log('initTC')
+                if(!this.tencentCaptcha) {
+                    this.tencentCaptcha = new TencentCaptcha('2038819750', this.callback);
+                }
+			},
             callback(res) {
                 if(res.ret === 0){
                     this.send(res.ticket)
@@ -82,6 +94,7 @@
 			},
             getCode() {
                 if(this.showTime) return
+				console.log(/TencentCaptcha/, TencentCaptcha)
                 this.tencentCaptcha.show()
 			},
 			send() {

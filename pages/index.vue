@@ -29,6 +29,11 @@
     import MIntro from '~/components/index/m-intro'
     import MPrice from '~/components/index/m-price'
 	export default {
+        head () {
+            return {
+                title: '首页'
+            }
+        },
 		components: {
             MBanner,
             MIntro,
