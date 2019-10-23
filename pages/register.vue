@@ -31,14 +31,16 @@
     export default {
         layout: 'simple',
         head() {
+            let skip
+            if (process.client) {
+                skip = !!this.$window.TencentCaptcha
+            }
             return {
                 title: '注册',
                 script: [
                     {
-                        once: true,
-						skip: this.externalLoaded,
-                        src: 'https://ssl.captcha.qq.com/TCaptcha.js',
-                        callback: () => (this.externalLoaded = true)
+                        skip: skip,
+                        src: 'https://ssl.captcha.qq.com/TCaptcha.js'
                     }
                 ]
             }
