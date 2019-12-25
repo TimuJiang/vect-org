@@ -2,7 +2,7 @@
 	v-layout.page-index(column align-center)
 		m-banner
 		.ability-row
-			.ability-row__content
+			.ability-row__content(@click="onSome")
 				.ability-row__item
 					img(src="~assets/images/ability-1.png")
 					p.ability-row__title 市场数据分析
@@ -39,6 +39,11 @@
             MIntro,
             MPrice,
             MTry: ()=>import('~/components/index/m-try')
+		},
+		methods: {
+			onSome(){
+				alert('xxxx')
+			}
 		}
 	}
 </script>
